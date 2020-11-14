@@ -1,0 +1,31 @@
+{
+  "name": "nested-response",
+  "version": "1.0.0",
+  "description": "Make nested response from flat records",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Babak-Gholamzadeh/nested-response.git"
+  },
+  "keywords": [
+    "nested",
+    "object",
+    "flat",
+    "record",
+    "array",
+    "sql"
+  ],
+  "author": "Babak Gholamzadeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Babak-Gholamzadeh/nested-response/issues"
+  },
+  "homepage": "https://github.com/Babak-Gholamzadeh/nested-response#readme",
+  "dependencies": {
+    "deeply-object-assign": "^1.0.0",
+    "realtypeof": "^1.1.0"
+  }
+}
