@@ -1,5 +1,6 @@
 const convertType = require('./convert-type');
 const deeplyObjectAssign = require('deeply-object-assign');
+const realTypeOf = require('realtypeof');
 
 const makeNestedObject = (data, def) => {
   const {
@@ -17,13 +18,22 @@ const makeNestedObject = (data, def) => {
         .entries(restColumns)
         .forEach(([defKey, defValue]) => {
           const { $column, $type, $default } = defValue;
+          // If the record value and default value are both undefined, skip that column
+          if (
+            !['array', 'object'].includes($type) &&
+            realTypeOf.isUndefined(record[$column]) &&
+            realTypeOf.isUndefined($default)
+          ) return;
+
           nestedObject[pk][defKey] = ['array', 'object'].includes($type) ?
             deeplyObjectAssign(
               nestedObject[pk][defKey] || {},
               makeNestedObject([record], defValue)
             ) :
             convertType(
-              record[$column] !== undefined ? record[$column] : $default
+              !realTypeOf.isUndefined(record[$column]) ?
+                record[$column] :
+                $default
             ).to($type);
         });
       return nestedObject;
